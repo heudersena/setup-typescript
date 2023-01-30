@@ -18,4 +18,6 @@ EXPOSE $PORT
 
 RUN npm install --force
 
+RUN npm run build
+
 ENTRYPOINT ["node", "dist/server.js"]
