@@ -1,23 +1,13 @@
-FROM node:latest
+FROM node:alpine
 
-WORKDIR /app
+WORKDIR /usr/app
 
 COPY package*.json ./
 
+RUN npm install
+
 COPY . .
 
-COPY --chown=node:node . .
+EXPOSE 3333
 
-RUN chmod 777 -R /app
-
-USER node
-
-ENV PORT=3333
-
-EXPOSE $PORT
-
-RUN npm install --force
-
-RUN npm run build
-
-ENTRYPOINT ["node", "dist/server.js"]
+CMD ["npm","run","dev"]
